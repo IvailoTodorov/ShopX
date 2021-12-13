@@ -8,6 +8,7 @@ namespace ShopXWeb
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using ShopXWeb.Data;
+    using ShopXWeb.Infrastructure;
 
     public class Startup
     {
@@ -18,7 +19,7 @@ namespace ShopXWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.
-                AddDbContext<ApplicationDbContext>(options => options
+                AddDbContext<ShopXDbContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services
@@ -32,7 +33,7 @@ namespace ShopXWeb
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ShopXDbContext>();
 
             services
                 .AddControllersWithViews();
@@ -40,6 +41,8 @@ namespace ShopXWeb
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.PrepareDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
