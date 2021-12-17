@@ -24,6 +24,9 @@
         public double Price { get; set; }
 
         [Required]
+        public string PriceType { get; set; } // user can select between USD and BGN
+
+        [Required]
         public string Description { get; set; }
 
         public int CategoryId { get; set; }

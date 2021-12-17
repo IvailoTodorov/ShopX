@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopXWeb.Data;
 
 namespace ShopXWeb.Data.Migrations
 {
     [DbContext(typeof(ShopXDbContext))]
-    partial class ShopXDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211214102432_PostPriceType")]
+    partial class PostPriceType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
