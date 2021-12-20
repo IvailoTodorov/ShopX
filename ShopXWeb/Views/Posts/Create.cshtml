@@ -13,6 +13,7 @@
                 <div class="form-group">
                     <label asp-for="Title"></label>
                     <input asp-for="Title" class="form-control" placeholder="Gaming Mouse">
+                    <span asp-validation-for="Title" class="small text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="CategoryId"></label>
@@ -26,6 +27,7 @@
                 <div class="form-group">
                     <label asp-for="Price"></label>
                     <input asp-for="Price" class="form-control" placeholder="50.00">
+                    <span asp-validation-for="Price" class="small text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="CurrencyTypeId"></label>
@@ -39,10 +41,12 @@
                 <div class="form-group">
                     <label asp-for="Image"></label>
                     <input asp-for="Image" class="form-control" placeholder="URL">
+                    <span asp-validation-for="Image" class="small text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Description"></label>
                     <textarea asp-for="Description" rows="4" class="form-control" placeholder="Something About Product"></textarea>
+                    <span asp-validation-for="Description" class="small text-danger"></span>
                 </div>
 
                 <input class="btn btn-primary" type="submit" value="Create" /> 
