@@ -1,9 +1,7 @@
 ﻿namespace ShopXWeb.Models.Posts
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    using System.ComponentModel.DataAnnotations;
 
     public class AddPostFormModel
     {
@@ -13,10 +11,16 @@
 
         public double Price { get; init; }
 
-        public string PriceType { get; init; }
-
         public string Description { get; init; }
 
+        [Display(Name = "Category")]
         public int CategoryId { get; init; }
+
+        public IEnumerable<PostCategoryViewModel> Categories { get; set; }
+
+        [Display(Name = "Currency")]
+        public int CurrencyTypeId { get; init; }
+
+        public IEnumerable<PostCurrencyTypeViewModel> CurrencyTypes { get; set; }
     }
 }

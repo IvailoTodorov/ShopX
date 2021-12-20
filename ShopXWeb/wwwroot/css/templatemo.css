@@ -166,9 +166,20 @@ body, ul, li, p, a, label, input, div {
   width: 6px;
   height: 6px;
 }
+.heading-margin{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
 
 @media (min-width: 576px) {
-  .tempaltemo-carousel .h1 { font-size: 1em !important;}
+    .tempaltemo-carousel .h1 { font-size: 1em !important;}
 }
 
 /*// Medium devices (tablets, 768px and up)*/

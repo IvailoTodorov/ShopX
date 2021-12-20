@@ -15,6 +15,8 @@
 
         public DbSet<Category> Categories { get; init; }
 
+        public DbSet<CurrencyType> CurrencyTypes { get; init; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

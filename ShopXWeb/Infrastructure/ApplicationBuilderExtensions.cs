@@ -18,6 +18,7 @@
             data.Database.Migrate();
 
             SeedCategory(data);
+            SeedCurrencyTypes(data);
 
             return app;
         } 
@@ -45,6 +46,22 @@
                 new Category { Name = "Work"},
                 new Category { Name = "I\'m giving away"},
             });
+            data.SaveChanges();
+        }
+
+        private static void SeedCurrencyTypes(ShopXDbContext data)
+        {
+            if (data.CurrencyTypes.Any())
+            {
+                return;
+            }
+
+            data.CurrencyTypes.AddRange(new[]
+            {
+                new CurrencyType { Name = "BGN"},
+                new CurrencyType { Name = "USD"}
+            });
+            data.SaveChanges();
         }
     }
 }

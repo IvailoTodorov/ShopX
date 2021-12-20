@@ -1,5 +1,52 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model AddPostFormModel
+
 @{
+    ViewData["Title"] = "Add a product";
 }
+
+
+<div class="container">
+    <div class="row">
+        <div class="offset-lg-2 col-lg-8 col-sm-12 col-xl-6">
+            <h2 class="heading-margin text-center">Add a product</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Gaming Mouse">
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId"></label>
+                    <select asp-for="CategoryId" class="form-control">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <option value="@category.Id">@category.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" placeholder="50.00">
+                </div>
+                <div class="form-group">
+                    <label asp-for="CurrencyTypeId"></label>
+                    <select asp-for="CurrencyTypeId" class="form-control">
+                        @foreach (var currencyType in Model.CurrencyTypes)
+                        {
+                            <option value="@currencyType.Id">@currencyType.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Image"></label>
+                    <input asp-for="Image" class="form-control" placeholder="URL">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" rows="4" class="form-control" placeholder="Something About Product"></textarea>
+                </div>
+
+                <input class="btn btn-primary" type="submit" value="Create" /> 
+            </form>
+        </div>
+    </div>
+</div>
