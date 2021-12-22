@@ -66,8 +66,28 @@
             this.data.Posts.Add(postData);
             this.data.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
 
+        }
+
+        public IActionResult All()
+        {
+            var posts = this.data
+                .Posts
+                .OrderByDescending(x => x.Id)
+                .Select(p => new PostListingViewModel
+                {
+                    Id = p.Id,
+                    Image = p.Image,
+                    Title = p.Title,
+                    Price = p.Price,
+                    CurrencyType = p.CurrencyType.Name
+                })
+                .ToList();
+
+            ViewData["Categories"] = GetPostCategories();
+
+            return View(posts);
         }
 
         private IEnumerable<PostCategoryViewModel> GetPostCategories()
