@@ -1,5 +1,6 @@
 ﻿namespace ShopXWeb.Models.Posts
 {
+    using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -15,8 +16,7 @@
         public string Title { get; init; }
 
         [Required]
-        [Url]
-        public string Image { get; init; }
+        public IFormFile Image { get; init; }
 
         [Range(PostPriceMinValue, PostPriceMaxValue)]
         public double Price { get; init; }

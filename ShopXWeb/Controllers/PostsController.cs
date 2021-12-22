@@ -1,19 +1,27 @@
 ﻿namespace ShopXWeb.Controllers
 {
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using ShopXWeb.Data;
     using ShopXWeb.Data.Models;
     using ShopXWeb.Models.Posts;
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
 
     public class PostsController : Controller
     {
         private readonly ShopXDbContext data;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public PostsController(ShopXDbContext data)
+        public PostsController(
+            ShopXDbContext data,
+            IWebHostEnvironment webHostEnvironment)
         {
             this.data = data;
+            this.webHostEnvironment = webHostEnvironment;
+
         }
 
         public IActionResult Create() => View(new AddPostFormModel
@@ -43,10 +51,12 @@
                 return View(post);
             }
 
+            string uniqueFileName = ProcessUploadedFile(post);
+
             var postData = new Post
             {
                 Title = post.Title,
-                Image = post.Image,
+                Image = uniqueFileName,
                 Price = post.Price,
                 Description = post.Description,
                 CategoryId = post.CategoryId,
@@ -79,5 +89,23 @@
                 Name = p.Name
             })
             .ToList();
+
+        private string ProcessUploadedFile(AddPostFormModel model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Image != null)
+            {
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "img");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Image.CopyTo(fileStream);
+                }
+            }
+
+            return uniqueFileName;
+        }
     }
 }
