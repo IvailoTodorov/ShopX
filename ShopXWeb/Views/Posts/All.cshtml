@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PostListingViewModel>
+﻿@model SearchPostQueryModel
 
 @{
     IEnumerable<PostCategoryViewModel> categories = ViewData["Categories"] as IEnumerable<PostCategoryViewModel>;
@@ -23,34 +23,31 @@
             </ul>
         </div>
 
+
         <div class="col-lg-9">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="list-inline shop-top-menu pb-3 pt-1">
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-6 pb-4">
-                    <div class="d-flex">
-                        <select class="form-control">
-                            <option>Featured</option>
-                            <option>A to Z</option>
-                            <option>Item</option>
-                        </select>
+            <form method="get">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="SearchTerm"></label>
+                        <input asp-for="SearchTerm" class="form-control" placeholder="Gucci Flip Flops, etc..." />
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <div class="form-group">
+                            <label asp-for="Sorting"></label>
+                            <select asp-for="Sorting" class="form-control">
+                                <option value="0" selected>Date Created</option>
+                                <option value="1">Title</option>
+                            </select>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            </form>
+            
             <div class="row">
 
-                @foreach (var post in Model)
+                @foreach (var post in Model.Posts)
                 {
                     <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">

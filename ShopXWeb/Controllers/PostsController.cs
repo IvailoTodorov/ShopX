@@ -70,11 +70,24 @@
 
         }
 
-        public IActionResult All()
+        public IActionResult All([FromQuery]SearchPostQueryModel query)
         {
-            var posts = this.data
-                .Posts
-                .OrderByDescending(x => x.Id)
+            var postsQuery = this.data.Posts.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
+            {
+                postsQuery = postsQuery.Where(
+                    p => p.Title.ToLower().Contains(query.SearchTerm.ToLower()) ||
+                    p.Description.ToLower().Contains(query.SearchTerm.ToLower()));
+            }
+
+            postsQuery = query.Sorting switch
+            {
+                PostSorting.Title => postsQuery.OrderBy(p => p.Title),
+                PostSorting.DateCreated or _ => postsQuery.OrderByDescending(p => p.Id)
+            };
+
+            var posts = postsQuery
                 .Select(p => new PostListingViewModel
                 {
                     Id = p.Id,
@@ -87,7 +100,9 @@
 
             ViewData["Categories"] = GetPostCategories();
 
-            return View(posts);
+            query.Posts = posts;
+
+            return View(query);
         }
 
         private IEnumerable<PostCategoryViewModel> GetPostCategories()
