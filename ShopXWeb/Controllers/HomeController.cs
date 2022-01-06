@@ -1,5 +1,6 @@
 ﻿namespace ShopXWeb.Controllers
 {
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
@@ -32,11 +33,24 @@
                 .Take(3)
                 .ToList();
 
+
             return View(posts);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() 
             => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+
+        //private IEnumerable<PostCategoryViewModel> GetThreePostCategories()
+        //   => this.data
+        //   .Categories
+        //   .Select(p => new PostCategoryViewModel
+        //   {
+        //       Id = p.Id,
+        //       Name = p.Name
+        //   })
+        //    .Take(3)
+        //   .ToList();
     }
 }

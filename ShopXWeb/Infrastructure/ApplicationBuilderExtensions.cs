@@ -32,13 +32,13 @@
 
             data.Categories.AddRange(new[]
             {
+                new Category { Name = "Fashion"},
+                new Category { Name = "Sports, books, hobbies"},
+                new Category { Name = "Electronics"},
                 new Category { Name = "Real Estate"},
                 new Category { Name = "Cars, caravans, boats"},
-                new Category { Name = "Electronics"},
-                new Category { Name = "Sports, books, hobbies"},
                 new Category { Name = "Animals"},
                 new Category { Name = "Home and garden"},
-                new Category { Name = "Fashion"},
                 new Category { Name = "Baby and child"},
                 new Category { Name = "Excursions, vacations"},
                 new Category { Name = "Services"},
