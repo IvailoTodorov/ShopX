@@ -87,7 +87,11 @@
                 PostSorting.DateCreated or _ => postsQuery.OrderByDescending(p => p.Id)
             };
 
+            var totalPosts = postsQuery.Count();
+
             var posts = postsQuery
+                .Skip((query.CurrentPage - 1) * SearchPostQueryModel.PostsPerPage)
+                .Take(SearchPostQueryModel.PostsPerPage)
                 .Select(p => new PostListingViewModel
                 {
                     Id = p.Id,
@@ -101,6 +105,7 @@
             ViewData["Categories"] = GetPostCategories();
 
             query.Posts = posts;
+            query.TotalPosts = totalPosts;
 
             return View(query);
         }
