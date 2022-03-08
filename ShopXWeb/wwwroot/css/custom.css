@@ -1,9 +1,10 @@
+/*Featured Product IMGs*/
 .card-img {
     width: 300px;
     height: 369px;
 }
 
 .card-img-top {
-    width: 405px;
+    width: 100%;
     height: 400px;
 }
