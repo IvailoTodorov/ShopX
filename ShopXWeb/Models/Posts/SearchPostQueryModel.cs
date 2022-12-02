@@ -7,7 +7,7 @@
     {
         //public IEnumerable<string> Titles { get; init; }
 
-        public const int PostsPerPage = 2;
+        public const int PostsPerPage = 10;
 
         [Display(Name = "Search")]
         public string SearchTerm { get; init; }
